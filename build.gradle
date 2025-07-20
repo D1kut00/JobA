@@ -1,17 +1,35 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
-group = 'org.example'
+group = 'ru.skillbox'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    telegramBotsVersion = '6.8.0'
+    lombokVersion = '1.18.30'
+}
+
 dependencies {
+    // Telegram Bots API (classic long polling)
+    implementation "org.telegram:telegrambots:$telegramBotsVersion"
+
+    // Lombok
+    implementation "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    // JUnit 5
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+application {
+    mainClass = 'Main' // or 'your.package.name.Main' if Main.java is in a package
 }
 
 test {
